@@ -4,4 +4,24 @@
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<EmployeeDetailComponent Employee="employee"></EmployeeDetailComponent>
+
+@code{
+    private int currentCount = 0;
+
+    private Employee employee;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        System.Threading.Thread.Sleep(5000);
+
+        employee = new Employee
+        {
+            Name = "Benjamin Chinwe",
+            Title = "Developer",
+            Department = "Application Development"
+        };
+    }
+}

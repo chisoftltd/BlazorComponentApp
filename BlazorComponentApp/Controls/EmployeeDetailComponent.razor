@@ -1,0 +1,19 @@
+﻿<h3>Employee Detail</h3>
+
+<br />
+<p>Name : @Employee.Name</p>
+
+<p>Title : @Employee.Title</p>
+
+<p>Department : @Employee.Department</p>
+
+@code {
+    [Parameter]
+    public Employee Employee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        this.Employee.LoadRecords();
+    }
+}
