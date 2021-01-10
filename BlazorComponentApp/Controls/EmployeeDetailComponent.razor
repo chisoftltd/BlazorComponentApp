@@ -11,9 +11,9 @@
     [Parameter]
     public Employee Employee { get; set; }
 
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
-        base.OnInitialized();
         this.Employee.LoadRecords();
+        return base.OnInitializedAsync();
     }
 }
