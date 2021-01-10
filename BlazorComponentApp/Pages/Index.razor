@@ -1,12 +1,65 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<EmployeeDetailComponent Employee="employee"></EmployeeDetailComponent>
+<EditForm Model="person" OnInvalidSubmit="ValidFormSubmitted">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <label>
+        First Name: <br />
+        <InputText id="fname" @bind-Value="person.FirstName"></InputText>
+    </label>
+    <br />
+    <label>
+        Last Name: <br />
+        <InputText id="lname" @bind-Value="person.LastName"></InputText>
+    </label>
+    <br />
+    <label>
+        Employee Number:<br />
+        <InputText id="emp_number" @bind-Value="person.EmployeeNumber"></InputText>
+    </label>
+    <br />
+    <label>
+        Email:<br />
+        <InputText id="email" @bind-Value="person.Email"></InputText>
+    </label>
+    <br />
+    <input type="submit" value="Submit" />
+</EditForm>
 
+
+<br />
+<EmployeeDetailComponent Employee="employee"></EmployeeDetailComponent>
+<br />
 @code{
+
+    Person person = new Person();
+
+    private void ValidFormSubmitted()
+    {
+
+    }
+
+    public class Person
+    {
+        [Required]
+        [StringLength(100)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Range(1, 1000)]
+        public string EmployeeNumber { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
     private int currentCount = 0;
 
     private Employee employee;
