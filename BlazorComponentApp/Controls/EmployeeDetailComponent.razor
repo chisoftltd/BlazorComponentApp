@@ -1,19 +1,26 @@
 ﻿<h3>Employee Detail</h3>
 
-<br />
-<p>Name : @Employee.Name</p>
 
-<p>Title : @Employee.Title</p>
+@if (this.Employee != null)
+{
+    <p>Number : @Employee.Id</p>
+    <p>Name : @Employee.Name</p>
 
-<p>Department : @Employee.Department</p>
+    <p>Title : @Employee.Title</p>
+
+    <p>Department : @Employee.Department</p>
+}
 
 @code {
     [Parameter]
     public Employee Employee { get; set; }
 
-    protected override Task OnInitializedAsync()
+    protected override void OnParametersSet()
     {
-        this.Employee.LoadRecords();
-        return base.OnInitializedAsync();
+        base.OnParametersSet();
+        if (this.Employee != null)
+        {
+            this.Employee.LoadRecords();
+        }
     }
 }
